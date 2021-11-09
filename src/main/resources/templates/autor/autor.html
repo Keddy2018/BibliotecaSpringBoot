@@ -20,6 +20,14 @@
             <div class="conteiner">
                 <h1 class="display-3 text-center">Autores <a th:href="@{/}" class="home"> <ion-icon name="home-sharp" size="large"></ion-icon></a></h1>
             </div>
+
+
+            <!--Alerta de Datos Bien Cargados-->
+            <div class="alert alert-success" role="alert" th:if="${exito}!=null" th:text="${exito}"></div>
+            <!--Alerta de Datos Mal Cargados-->
+            <div class="alert alert-danger" role="alert" th:if="${error}!=null" th:text="${error}"></div>
+            
+
         </header>
 
 
@@ -33,8 +41,6 @@
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne">
                         Agregar un nuevo autor 
-                        <span class="label label-default text-center" style="color: black;" th:if="${exito}!=null" th:text="${exito}"></span>
-                        <span class="label label-warning text-center" style="color: red;" th:if="${error}!=null" th:text="${error}"></span>
                     </button>
 
 
@@ -135,9 +141,9 @@
                                         <th scope="col">Modificar</th>
                                     </tr>
                                 </thead>
-                                <tbody th:each="autor:${autores}">
+                                <tbody th:each="autor, iterador:${autores}">
                                     <tr>
-                                        <th scope="row"></th>
+                                        <th scope="row" th:text="${iterador.index}+1"></th>
                                         <td th:text="${autor.nombre}"></td>
                                         <td><button type="submit" class="btn btn-danger col-md-12">Dar de Baja</button></td>
                                         <td><button type="submit" class="btn btn-warning col-md-12">Modificar</button></td>

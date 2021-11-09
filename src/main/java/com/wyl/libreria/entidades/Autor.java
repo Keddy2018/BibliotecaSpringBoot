@@ -8,6 +8,7 @@ package com.wyl.libreria.entidades;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
@@ -33,6 +34,7 @@ public class Autor {
         this.id = id;
         this.nombre = nombre;
         this.alta = alta;
+
     }
 
     public Autor() {
@@ -74,10 +76,12 @@ public class Autor {
         this.libros = libros;
     }
 
-    
+
     @Override
     public String toString() {
-        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", alta=" + alta + '}';
+        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", alta=" + alta + ", libros=" + libros + '}';
     }
 
+
+    
 }
