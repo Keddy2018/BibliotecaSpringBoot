@@ -26,7 +26,7 @@
             <div class="alert alert-success" role="alert" th:if="${exito}!=null" th:text="${exito}"></div>
             <!--Alerta de Datos Mal Cargados-->
             <div class="alert alert-danger" role="alert" th:if="${error}!=null" th:text="${error}"></div>
-            
+
 
         </header>
 
@@ -82,7 +82,7 @@
                         <form class="form-inline">
                             <div class="form-group mb-2">
                                 <label><strong>Autor a Buscar</strong></label>
-                                <input type="text" class="form-control" id="exampleInputName2" placeholder="Walter Recosta">
+                                <input type="text" class="form-control" id="exampleInputName2" placeholder="Nombre">
                             </div>
                             <button type="submit" class="btn btn-primary col-md-12">Buscar</button>
                         </form>
@@ -103,8 +103,8 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Ejemplo 1</td>
-                                        <td><button type="submit" class="btn btn-danger col-md-12">Dar de Baja</button></td>
                                         <td><button type="submit" class="btn btn-warning col-md-12">Modificar</button></td>
+                                        <td><button type="submit" class="btn btn-danger col-md-12">Dar de Baja</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -145,8 +145,9 @@
                                     <tr>
                                         <th scope="row" th:text="${iterador.index}+1"></th>
                                         <td th:text="${autor.nombre}"></td>
-                                        <td><button type="submit" class="btn btn-danger col-md-12">Dar de Baja</button></td>
-                                        <td><button type="submit" class="btn btn-warning col-md-12">Modificar</button></td>
+                                        <td th:if="${autor.alta} == true " ><a class="btn btn-success col-md-12"  th:href="@{/autor/} + ${autor.id}" href="/autor/">Dar Baja</a></td>
+                                        <td th:if="${autor.alta} == false "><a class="btn btn-danger col-md-12"  th:href="@{/autor/} + ${autor.id}" href="/autor/">Dar Alta</a></td>
+                                        <td><a class="btn btn-warning col-md-12" th:href="@{/autor/modificar} " onclick="accordion-item">Modificar</a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -156,6 +157,58 @@
                 </div>
             </div>
             <!--Fin acordion 3 -->
+
+
+
+
+
+
+
+            <!--Principio acordion 4 -->
+            <div class="accordion-item" th:if="${modificar}!= null">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                            aria-expanded="true" aria-controls="collapseFour">
+                        Modificar el Autor 
+                    </button>
+
+
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse " aria-labelledby="headingFour"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <!--Principio de formulario para modificar un nuevo autor -->
+                        <form class="form-inline" th:action="@{../autor/}" method="post">
+                            <div class="form-group mb-2">
+                                <label><strong>Nombre del Autor</strong></label>
+                                <input type="text" name="nombreAutor" class="form-control" id="exampleInputName2" placeholder="Nombre">
+                                <label><strong>Nombre del Autor</strong></label>
+                                <input type="text" name="nombreAutor" class="form-control" id="exampleInputName2" placeholder="Nombre">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary col-md-12">Crear Nuevo Autor</button>
+                        </form>
+                        <!--Fin de formulario para modificar un nuevo autor -->
+                    </div>
+                </div>
+            </div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         </div>

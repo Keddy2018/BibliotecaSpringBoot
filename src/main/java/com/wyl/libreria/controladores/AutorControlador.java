@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author recos
  */
 @Controller
-@RequestMapping("/autor")
+@RequestMapping("/autor/")
 public class AutorControlador {
     
     @Autowired
@@ -32,14 +33,6 @@ public class AutorControlador {
     @GetMapping("/")
     public String pageAutor(ModelMap modelo){
         List<Autor> listaAutores = autorServi.consultarAutores();
-        List<Integer> indices = new ArrayList<>();
-        int i = 1;
-        for (Autor listaAutor : listaAutores) {
-            indices.add(i);
-            i++;
-        }
-        
-        modelo.addAttribute("identificador",indices);
         modelo.addAttribute("autores", listaAutores );
         return "autor/autor.html";
     }
@@ -55,6 +48,23 @@ public class AutorControlador {
         return "autor/autor.html";
     }
     
+    @GetMapping("/{id}")
+    public String darAltaBajaAutor(ModelMap modelo,@PathVariable(value = "id") String idProducto){
+        try {
+            boolean estado = autorServi.darAltaBajaAutorPorId(idProducto);
+            String mensaje = "El autor fue dado de " + (estado? "alta" : "baja") + " correcatmente";
+            modelo.put("exito", mensaje);
+        } catch (Exception e) {
+            modelo.put("error",e.getMessage());
+        }
+        return "autor/autor.html";
+    }
+    
+    @GetMapping("/autor/modificar")
+    public String modificarAutor(ModelMap modelo){
+        modelo.put("modificar", "Modificar");
+        return "autor/autor.html";
+    }
     
     
 }

@@ -33,4 +33,11 @@ public class AutorServicio {
     public List<Autor> consultarAutores(){
         return autorRepo.findAll();
     }
+    
+    public boolean darAltaBajaAutorPorId(String id){
+        Autor autor = autorRepo.getById(id);
+        autor.setAlta(!autor.getAlta());
+        autorRepo.save(autor);
+        return autor.getAlta();
+    }
 }
